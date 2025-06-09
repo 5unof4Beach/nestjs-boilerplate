@@ -1,4 +1,4 @@
-name: Dispatch Jobs
+name: Deployment Jobs
 on:
   push:
 jobs:
