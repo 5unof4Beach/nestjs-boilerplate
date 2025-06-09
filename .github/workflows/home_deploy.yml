@@ -36,5 +36,7 @@ jobs:
       - name: Deploy to Server
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
-          ./deploy-commands/nestjs-template/github-action-deploy.sh
+          cd ./deploy-commands/nestjs-template
+          bash github-action-deploy.sh production
+
       
