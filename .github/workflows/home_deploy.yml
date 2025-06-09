@@ -15,7 +15,7 @@ jobs:
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nestjs-boiler-plate:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nestjs-boiler-plate:latest document.Dockerfile
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nestjs-boiler-plate:latest
       - name: Install cloudflared
         run: |
