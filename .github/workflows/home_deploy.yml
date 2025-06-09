@@ -35,8 +35,6 @@ jobs:
               IdentityFile ~/.ssh/id_ed25519
       - name: Deploy to Server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
-          cd ./deploy-commands/nestjs-template
-          bash github-action-deploy.sh production
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ./deploy-commands/nestjs-template && bash github-action-deploy.sh production"
 
       
