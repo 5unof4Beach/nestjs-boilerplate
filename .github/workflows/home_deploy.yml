@@ -35,5 +35,6 @@ jobs:
               IdentityFile ~/.ssh/id_ed25519
       - name: Deploy to Server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nestjs-boiler-plate:latest && docker run -d -p 3000:3000 --name my-nestjs-app ${{ secrets.DOCKERHUB_USERNAME }}/nestjs-boiler-plate:latest"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+          ./deploy-commands/nestjs-template/github-action-deploy.sh
       

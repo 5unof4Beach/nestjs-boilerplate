@@ -6,6 +6,8 @@ services:
     ports:
       - ${MAIL_CLIENT_PORT}:1080
       - ${MAIL_PORT}:1025
+    networks:
+      - nestjs-boilerplate-network
 
   mongo:
     image: mongo:8.0.9
@@ -17,6 +19,8 @@ services:
       - boilerplate-mongo-db:/data/db
     ports:
       - ${DATABASE_PORT}:27017
+    networks:
+      - nestjs-boilerplate-network
 
   mongo-express:
     image: mongo-express
@@ -27,6 +31,8 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: ${DATABASE_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${DATABASE_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@mongo:${DATABASE_PORT}/
+    networks:
+      - nestjs-boilerplate-network
 
   # Uncomment to use redis
   # redis:
@@ -37,9 +43,15 @@ services:
   api:
     build:
       context: .
-      dockerfile: document.Dockerfile
+      dockerfile: prod.Dockerfile
     ports:
       - ${APP_PORT}:${APP_PORT}
+    networks:
+      - nestjs-boilerplate-network
 
 volumes:
   boilerplate-mongo-db:
+
+networks:
+  nestjs-boilerplate-network:
+    driver: bridge
