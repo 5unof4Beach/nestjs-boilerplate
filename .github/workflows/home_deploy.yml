@@ -33,4 +33,7 @@ jobs:
             Host ${{ secrets.SSH_HOST }}
               ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h --id ${{ secrets.CF_SERVICE_TOKEN_ID }} --secret ${{ secrets.CF_SERVICE_TOKEN_SECRET }}
               IdentityFile ~/.ssh/id_ed25519
+      - name: Deploy to Server
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-nestjs-app:latest && docker run -d -p 3000:3000 --name my-nestjs-app ${{ secrets.DOCKERHUB_USERNAME }}/nestjs-boiler-plate:latest"
       
