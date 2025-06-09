@@ -9,7 +9,7 @@ RUN npm i -g @nestjs/cli typescript ts-node
 
 # Copy package.json and package-lock.json (if exists) to a temporary directory
 COPY package*.json /tmp/app/
-RUN cd /tmp/app && npm install
+RUN cd /tmp/app && npm  ci --no-audit
 
 # Copy the application code
 COPY . /usr/src/app
@@ -41,7 +41,7 @@ COPY --from=builder /usr/src/app/wait-for-it.sh /opt/wait-for-it.sh
 COPY --from=builder /usr/src/app/startup.document.dev.sh /opt/startup.document.dev.sh
 
 # Install only production dependencies
-RUN npm install --omit=dev
+RUN npm ci --omit=dev && npm cache clean --force
 
 # Make scripts executable and remove Windows line endings
 RUN chmod +x /opt/wait-for-it.sh
