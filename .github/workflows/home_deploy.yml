@@ -15,8 +15,8 @@ jobs:
           echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
       - name: Build and Push Docker Image
         run: |
-          docker build -t ghcr.io/<your-username>/my-nestjs-app:latest .
-          docker push ghcr.io/<your-username>/my-nestjs-app:latest
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-nestjs-app:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-nestjs-app:latest
       - name: Install cloudflared
         run: |
           curl -L https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-archive-keyring.gpg >/dev/null
